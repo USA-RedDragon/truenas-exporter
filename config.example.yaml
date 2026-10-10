@@ -23,5 +23,5 @@ truenas:
 poll:
   # How often pools, disk temperatures, alerts and ARC are fetched
   interval: "1m"
-  # How often SMART self-test results are fetched, or 0 to turn SMART collection off. smart.test.results fails for API clients on TrueNAS 25.04 (NAS-136478)
+  # SMART self-test poll interval; 0 disables. TrueNAS 25.04 rejects smart.test.results for read-only API keys, and 25.10 removes the call
   smart-interval: "15m"

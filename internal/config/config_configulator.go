@@ -289,7 +289,7 @@ func configRegisterPFlags(fs *pflag.FlagSet, o *cpflag.Options) error {
 	fs.Bool(names[6], false, "Skip TLS certificate verification. Prefer tls-fingerprint")
 	fs.Duration(names[7], time.Duration(int64(30000000000)), "Timeout for connecting and for each API call")
 	fs.Duration(names[8], time.Duration(int64(60000000000)), "How often pools, disk temperatures, alerts and ARC are fetched")
-	fs.Duration(names[9], time.Duration(int64(900000000000)), "How often SMART self-test results are fetched, or 0 to turn SMART collection off. smart.test.results fails for API clients on TrueNAS 25.04 (NAS-136478)")
+	fs.Duration(names[9], time.Duration(int64(900000000000)), "SMART self-test poll interval; 0 disables. TrueNAS 25.04 rejects smart.test.results for read-only API keys, and 25.10 removes the call")
 	return nil
 }
 

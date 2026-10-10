@@ -40,7 +40,7 @@ type TrueNAS struct {
 
 type Poll struct {
 	Interval      time.Duration `name:"interval" description:"How often pools, disk temperatures, alerts and ARC are fetched" default:"1m"`
-	SMARTInterval time.Duration `name:"smart-interval" description:"How often SMART self-test results are fetched, or 0 to turn SMART collection off. smart.test.results fails for API clients on TrueNAS 25.04 (NAS-136478)" default:"15m"`
+	SMARTInterval time.Duration `name:"smart-interval" description:"SMART self-test poll interval; 0 disables. TrueNAS 25.04 rejects smart.test.results for read-only API keys, and 25.10 removes the call" default:"15m"`
 }
 
 var (

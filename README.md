@@ -19,7 +19,7 @@ A Prometheus exporter for TrueNAS SCALE 25.04 and later. It keeps one logged-in 
 | `truenas_arc_size_bytes` | | ZFS ARC size |
 | `truenas_collector_success`, `truenas_collector_duration_seconds`, `truenas_collector_last_success_timestamp_seconds` | collector | Health of each fetch |
 
-On TrueNAS 25.04, `smart.test.results` fails for API clients because its result schema does not accept the `power_on_hours_ago` field ([NAS-136478](https://ixsystems.atlassian.net/browse/NAS-136478)). Set `poll.smart-interval` to `0` there; TrueNAS still raises a `SMART` alert, which shows up in `truenas_alerts`.
+On TrueNAS 25.04, `smart.test.results` fails for API keys without `DISK_WRITE` or full admin: its legacy return schema rejects newer parser fields such as `power_on_hours_ago` and the NVMe-only fields. TrueNAS 25.10 removes the SMART API from the middleware. Set `poll.smart-interval` to `0` on both; TrueNAS still raises a `SMART` alert, which shows up in `truenas_alerts`.
 
 ## TrueNAS access
 
@@ -46,6 +46,6 @@ Configuration is read from `config.yaml` in the working directory, environment v
 | `truenas.insecure-skip-verify` | boolean | `false` | `TRUENAS_INSECURE_SKIP_VERIFY` | `--truenas.insecure-skip-verify` | Skip TLS certificate verification. Prefer tls-fingerprint                                                                                                                                                   |
 | `truenas.timeout`              | string  | `30s`   | `TRUENAS_TIMEOUT`              | `--truenas.timeout`              | Timeout for connecting and for each API call                                                                                                                                                                |
 | `poll.interval`                | string  | `1m`    | `POLL_INTERVAL`                | `--poll.interval`                | How often pools, disk temperatures, alerts and ARC are fetched                                                                                                                                              |
-| `poll.smart-interval`          | string  | `15m`   | `POLL_SMART_INTERVAL`          | `--poll.smart-interval`          | How often SMART self-test results are fetched, or 0 to turn SMART collection off. smart.test.results fails for API clients on TrueNAS 25.04 (NAS-136478)                                                    |
+| `poll.smart-interval`          | string  | `15m`   | `POLL_SMART_INTERVAL`          | `--poll.smart-interval`          | SMART self-test poll interval; 0 disables. TrueNAS 25.04 rejects smart.test.results for read-only API keys, and 25.10 removes the call                                                                      |
 
 <!-- configulator:end -->
