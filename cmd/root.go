@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -97,7 +98,7 @@ func runRoot(cmd *cobra.Command, _ []string) error {
 		_, _ = w.Write([]byte("ok\n"))
 	})
 	srv := &http.Server{
-		Addr:              net.JoinHostPort(cfg.HTTP.Bind, strconv.Itoa(cfg.HTTP.Port)),
+		Addr:              net.JoinHostPort(strings.Trim(cfg.HTTP.Bind, "[]"), strconv.Itoa(cfg.HTTP.Port)),
 		Handler:           mux,
 		ReadHeaderTimeout: 10 * time.Second,
 	}
