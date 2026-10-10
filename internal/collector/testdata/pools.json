@@ -1,0 +1,41 @@
+[
+  {
+    "name": "data",
+    "status": "ONLINE",
+    "status_code": "RESILVERING",
+    "healthy": true,
+    "warning": true,
+    "size": 1000,
+    "allocated": 740,
+    "free": 260,
+    "scan": {
+      "function": "RESILVER",
+      "state": "SCANNING",
+      "start_time": {"$date": 1791399535000},
+      "end_time": null,
+      "percentage": 3.18,
+      "errors": 3,
+      "total_secs_left": 5994965
+    },
+    "topology": {
+      "data": [
+        {
+          "name": "mirror-0",
+          "type": "MIRROR",
+          "status": "ONLINE",
+          "disk": null,
+          "stats": {"read_errors": 0, "write_errors": 0, "checksum_errors": 0},
+          "children": [
+            {"name": "part-b", "type": "DISK", "status": "ONLINE", "disk": "sdb", "stats": {"read_errors": 0, "write_errors": 0, "checksum_errors": 2}, "children": []},
+            {"name": "part-c", "type": "DISK", "status": "ONLINE", "disk": "sdc", "stats": {"read_errors": 0, "write_errors": 0, "checksum_errors": 0}, "children": []}
+          ]
+        }
+      ],
+      "log": [],
+      "cache": [],
+      "spare": [],
+      "special": [],
+      "dedup": []
+    }
+  }
+]

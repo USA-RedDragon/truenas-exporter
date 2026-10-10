@@ -1,0 +1,27 @@
+# Sample configuration
+# Logging level for the application. One of debug, info, warn, or error
+log-level: "info"
+# HTTP server configuration
+http:
+  # Address to listen on. The default, [::], listens on all interfaces
+  bind: "[::]"
+  # Port to serve /metrics and /healthz on
+  port: 9814
+# TrueNAS connection
+truenas:
+  # TrueNAS JSON-RPC websocket URL, for example wss://truenas.local/api/current. Must be wss: TrueNAS revokes API keys that are sent over plain ws
+  # url: ""
+  # TrueNAS API key. A user with the POOL_READ, DISK_READ, REPORTING_READ and ALERT_LIST_READ roles is enough
+  # api-key: "(secret)"
+  # SHA-256 fingerprint of the TrueNAS certificate, hex with or without colons. When set, the certificate is pinned instead of verified against the system CAs, which suits the default self-signed certificate
+  # tls-fingerprint: ""
+  # Skip TLS certificate verification. Prefer tls-fingerprint
+  insecure-skip-verify: false
+  # Timeout for connecting and for each API call
+  timeout: "30s"
+# How often each group of data is fetched from TrueNAS
+poll:
+  # How often pools, disk temperatures, alerts and ARC are fetched
+  interval: "1m"
+  # How often SMART self-test results are fetched, or 0 to turn SMART collection off. smart.test.results fails for API clients on TrueNAS 25.04 (NAS-136478)
+  smart-interval: "15m"
